@@ -134,4 +134,31 @@ class RepositoryImpl implements Repository {
       return DeleteArticleModel.fromJson(e.response?.data);
     }
   }
+
+  @override
+  FutureOr<CreateArticleModel?> postUpdateArticle(int id, String title, String content, File? image, String token) async {
+    try {
+      var formData = FormData.fromMap({
+        "title": title,
+        "content": content,
+      });
+
+      if (image != null) {
+        formData.files.addAll(
+            [MapEntry("image", await MultipartFile.fromFile(image.path))]);
+      }
+
+      var response = await network.dio.post("/post/$id",
+          data: formData,
+          options: Options(headers: {
+            "Authorization": "Bearer $token",
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+          }));
+      return CreateArticleModel.fromJson(response.data);
+    } on DioError catch(e){
+      print(e.response?.data);
+      return CreateArticleModel.fromJson(e.response?.data);
+    }
+  }
 }

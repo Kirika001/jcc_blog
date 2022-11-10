@@ -17,4 +17,5 @@ abstract class Repository{
   FutureOr<ArticleDetailModel?> getDetail(int id, String token);
   FutureOr<CreateArticleModel?> postAricle (String title,String content, File image, String token);
   FutureOr<DeleteArticleModel?> deleteArticle (int id, String token);
+  FutureOr<CreateArticleModel?> postUpdateArticle(int id,String title, String content, File? image, String token);
 }

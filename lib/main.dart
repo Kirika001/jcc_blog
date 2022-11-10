@@ -7,6 +7,7 @@ import 'package:test_jccapi/ui/detail/detail_screen.dart';
 import 'package:test_jccapi/ui/login/login_screen.dart';
 import 'package:test_jccapi/ui/register/register_screen.dart';
 import 'package:test_jccapi/ui/splash/splash_screen.dart';
+import 'package:test_jccapi/ui/update/update_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/article", page: () => const ArticleScreen()),
         GetPage(name: "/detail", page: () => const DetailScreen()),
         GetPage(name: "/create", page: () => const CreateScreen()),
+        GetPage(name: "/update", page: () => const UpdateScreen()),
       ],
       initialRoute: "/",
     );

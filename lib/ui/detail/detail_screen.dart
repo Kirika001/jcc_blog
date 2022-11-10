@@ -33,7 +33,9 @@ class DetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   child: TextButton(
                       onPressed: () {
-
+                        Get.toNamed("/update", arguments: {
+                          "id" : controller.argumentData['id']
+                        });
                       },
                       child: const Text("Edit Artikel",
                           style: TextStyle(color: Colors.white))),
