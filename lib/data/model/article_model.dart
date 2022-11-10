@@ -1,73 +1,155 @@
+/// meta : {"code":200,"status":"success","message":"Data Posts"}
+/// data : [{"id":6,"title":"Kamu Mau ga jadi pacar aku, mitsuha?!","content":"KYAAAAA Kyomasa Pasukaru kun >,<","image":"http://jcc.brandingyou.id/assets/images/1667907384.jpg","author":"Muhammad Pascal Rahmadi","created_at":"08-11-2022"},{"id":5,"title":"Kata Fadli Saya Pascal ganteng Mencintai orang lain yahahaha","content":"Kepo lu mau apa ya terserah Gua","image":"http://jcc.brandingyou.id/assets/images/1667907355.jpg","author":"Muhammad Pascal Rahmadi","created_at":"08-11-2022"},{"id":4,"title":"Saya Pascal ganteng Mencintai orang lain yahahaha","content":"Kepo lu mau apa ya terserah Gua","image":"http://jcc.brandingyou.id/assets/images/1667907346.jpg","author":"Muhammad Pascal Rahmadi","created_at":"08-11-2022"},{"id":3,"title":"mitsuha wangy","content":"waifu aing\r\n\r\n-lord Rangga","image":"http://jcc.brandingyou.id/assets/images/1667904995.JPG","author":"Rangga Adi Pratama","created_at":"08-11-2022"}]
 
 class ArticleModel {
-  Meta? meta;
-  List<Data>? data;
-
-  ArticleModel({this.meta, this.data});
-
-  ArticleModel.fromJson(Map<String, dynamic> json) {
-    meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
-    data = json["data"] == null ? null : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
+  ArticleModel({
+    Meta? meta,
+    List<Data>? data,}){
+    _meta = meta;
+    _data = data;
   }
+
+  ArticleModel.fromJson(dynamic json) {
+    _meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
+    if (json['data'] != null) {
+      _data = [];
+      json['data'].forEach((v) {
+        _data?.add(Data.fromJson(v));
+      });
+    }
+  }
+  Meta? _meta;
+  List<Data>? _data;
+  ArticleModel copyWith({  Meta? meta,
+    List<Data>? data,
+  }) => ArticleModel(  meta: meta ?? _meta,
+    data: data ?? _data,
+  );
+  Meta? get meta => _meta;
+  List<Data>? get data => _data;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
-      _data["meta"] = meta?.toJson();
+    final map = <String, dynamic>{};
+    if (_meta != null) {
+      map['meta'] = _meta?.toJson();
     }
-    if(data != null) {
-      _data["data"] = data?.map((e) => e.toJson()).toList();
+    if (_data != null) {
+      map['data'] = _data?.map((v) => v.toJson()).toList();
     }
-    return _data;
+    return map;
   }
+
 }
+
+/// id : 6
+/// title : "Kamu Mau ga jadi pacar aku, mitsuha?!"
+/// content : "KYAAAAA Kyomasa Pasukaru kun >,<"
+/// image : "http://jcc.brandingyou.id/assets/images/1667907384.jpg"
+/// author : "Muhammad Pascal Rahmadi"
+/// created_at : "08-11-2022"
 
 class Data {
-  String? title;
-  String? content;
-  String? image;
-  String? author;
-  String? createdAt;
-
-  Data({this.title, this.content, this.image, this.author, this.createdAt});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    title = json["title"];
-    content = json["content"];
-    image = json["image"];
-    author = json["author"];
-    createdAt = json["created_at"];
+  Data({
+    num? id,
+    String? title,
+    String? content,
+    String? image,
+    String? author,
+    String? createdAt,}){
+    _id = id;
+    _title = title;
+    _content = content;
+    _image = image;
+    _author = author;
+    _createdAt = createdAt;
   }
+
+  Data.fromJson(dynamic json) {
+    _id = json['id'];
+    _title = json['title'];
+    _content = json['content'];
+    _image = json['image'];
+    _author = json['author'];
+    _createdAt = json['created_at'];
+  }
+  num? _id;
+  String? _title;
+  String? _content;
+  String? _image;
+  String? _author;
+  String? _createdAt;
+  Data copyWith({  num? id,
+    String? title,
+    String? content,
+    String? image,
+    String? author,
+    String? createdAt,
+  }) => Data(  id: id ?? _id,
+    title: title ?? _title,
+    content: content ?? _content,
+    image: image ?? _image,
+    author: author ?? _author,
+    createdAt: createdAt ?? _createdAt,
+  );
+  num? get id => _id;
+  String? get title => _title;
+  String? get content => _content;
+  String? get image => _image;
+  String? get author => _author;
+  String? get createdAt => _createdAt;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["title"] = title;
-    _data["content"] = content;
-    _data["image"] = image;
-    _data["author"] = author;
-    _data["created_at"] = createdAt;
-    return _data;
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['title'] = _title;
+    map['content'] = _content;
+    map['image'] = _image;
+    map['author'] = _author;
+    map['created_at'] = _createdAt;
+    return map;
   }
+
 }
 
+/// code : 200
+/// status : "success"
+/// message : "Data Posts"
+
 class Meta {
-  int? code;
-  String? status;
-  String? message;
-
-  Meta({this.code, this.status, this.message});
-
-  Meta.fromJson(Map<String, dynamic> json) {
-    code = json["code"];
-    status = json["status"];
-    message = json["message"];
+  Meta({
+    num? code,
+    String? status,
+    String? message,}){
+    _code = code;
+    _status = status;
+    _message = message;
   }
+
+  Meta.fromJson(dynamic json) {
+    _code = json['code'];
+    _status = json['status'];
+    _message = json['message'];
+  }
+  num? _code;
+  String? _status;
+  String? _message;
+  Meta copyWith({  num? code,
+    String? status,
+    String? message,
+  }) => Meta(  code: code ?? _code,
+    status: status ?? _status,
+    message: message ?? _message,
+  );
+  num? get code => _code;
+  String? get status => _status;
+  String? get message => _message;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["code"] = code;
-    _data["status"] = status;
-    _data["message"] = message;
-    return _data;
+    final map = <String, dynamic>{};
+    map['code'] = _code;
+    map['status'] = _status;
+    map['message'] = _message;
+    return map;
   }
+
 }
