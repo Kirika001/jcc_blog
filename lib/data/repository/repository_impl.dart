@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide FormData, MultipartFile;
 import 'package:test_jccapi/data/model/article_detail_model.dart';
 import 'package:test_jccapi/data/model/article_model.dart';
 import 'package:test_jccapi/data/model/create_article_model.dart';
+import 'package:test_jccapi/data/model/delete_article_model.dart';
 import 'package:test_jccapi/data/model/login_model.dart';
 import 'package:test_jccapi/data/model/logout_model.dart';
 import 'package:test_jccapi/data/model/register_model.dart';
@@ -67,10 +68,10 @@ class RepositoryImpl implements Repository {
             "Content-Type": "multipart/form-data"
           })
       );
-
+      print(response.data);
       return CreateArticleModel.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.error);
+      print(e.response?.data);
       return CreateArticleModel.fromJson(e.response?.data);
     }
   }
@@ -106,16 +107,31 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  FutureOr<LogoutModel> postLogout(String username, String password) async {
+  FutureOr<LogoutModel> postLogout() async {
     try {
       var response = await network.dio.post("/logout",
-          data: {"username": username, "password": password},
           options: Options(headers: {"Accept": "application/json"}));
       print(response.data);
       return LogoutModel.fromJson(response.data);
     } on DioError catch (e) {
       print(e.response?.data.toString());
       return LogoutModel.fromJson(e.response?.data);
+    }
+  }
+
+  @override
+  FutureOr<DeleteArticleModel?> deleteArticle(int id, String token) async {
+    try{
+      var response = await network.dio.delete("/post/$id",
+          options: Options(headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer $token",
+          }));
+
+      return DeleteArticleModel.fromJson(response.data);
+    }on DioError catch(e){
+      print(e.response?.data);
+      return DeleteArticleModel.fromJson(e.response?.data);
     }
   }
 }

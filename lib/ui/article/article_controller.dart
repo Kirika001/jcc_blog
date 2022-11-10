@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:test_jccapi/data/model/article_model.dart';
 import 'package:test_jccapi/data/model/logout_model.dart';
@@ -29,9 +30,13 @@ class ArticleController extends GetxController {
 
   void logout() async{
     try{
-      var res = await repository.postLogout(storage.getCurrentUsername().toString(), '12345678');
+      var res = await repository.postLogout();
       logoutModel = res;
-      update();
+      storage.deleteAuthResponse();
+      Fluttertoast.showToast(msg: res?.meta?.message ?? 'logout gagal');
+      if (res?.meta?.code == 200) {
+        Get.offAllNamed('/');
+      }
     } catch(e){
       e.printError();
     }

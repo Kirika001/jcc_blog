@@ -34,7 +34,6 @@ class CreateScreen extends StatelessWidget {
                         },
                       ),
                       TextFormField(
-                        // controller: controller.usernameController,
                         controller: controller.contentController,
                         maxLines: 5,
                         decoration: const InputDecoration(

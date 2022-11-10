@@ -17,7 +17,9 @@ class ArticleScreen extends StatelessWidget {
             )),
             backgroundColor: Colors.blue,
             actions: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.logout))
+              IconButton(onPressed: (){
+                controller.logout();
+              }, icon: Icon(Icons.logout))
             ],
           ),
           body: controller.articleModel != null ? ListView.builder(

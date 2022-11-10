@@ -47,7 +47,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        // Get.toNamed("/register");
+                        controller.delete();
                       },
                       child: const Text("Hapus Artikel")),
                 )
